@@ -62,7 +62,7 @@ var ActivityDialog = function ActivityDialog(_ref) {
     }
   }, _react["default"].createElement(_core.CircularProgress, null), _react["default"].createElement(_core.Typography, {
     style: {
-      marginRight: "20px"
+      marginLeft: "20px"
     }
   }, message))));
 };

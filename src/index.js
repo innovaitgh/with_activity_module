@@ -22,7 +22,7 @@ const ActivityDialog = ({activityDialogReducer}) => {
       <Dialog {...{open}}>
         <DialogContent style={{display: "flex", alignItems: "center"}}>
           <CircularProgress />
-          <Typography style={{marginRight: "20px"}}>
+          <Typography style={{marginLeft: "20px"}}>
             {message}
           </Typography>
         </DialogContent>
