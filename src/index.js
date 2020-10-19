@@ -1,37 +1,29 @@
 import React from "react";
-import Dialog from "@material-ui/core/Dialog";
-import DialogContent from "@material-ui/core/DialogContent";
-import CircularProgress from "@material-ui/core/CircularProgress";
-import Typography from "@material-ui/core/Typography";
+import {Dialog, DialogContent, CircularProgress, Typography} from "@material-ui/core";
+import ActivityDialogReducer from './reducer';
+import {eventHideActivityDialog,EVENT_HIDE_ACTIVITY_DIALOG, invokeShowActivityDialog, INVOKE_SHOW_ACTIVITY_DIALOG} from "./actions";
 
+export {
+  ActivityDialogReducer,
+  eventHideActivityDialog,
+  EVENT_HIDE_ACTIVITY_DIALOG,
+  invokeShowActivityDialog,
+  INVOKE_SHOW_ACTIVITY_DIALOG
+}
 
-function RenderDialog({ open }){
-  return(
+export default ({activityDialogReducer}) => {
+  const {open, message} = activityDialogReducer;
+
+  return (
     <React.Fragment>
-      <Dialog { ...{ open } }>
+      <Dialog {...{open}}>
         <DialogContent>
           <CircularProgress />
+          <Typography>
+            {message}
+          </Typography>
         </DialogContent>
       </Dialog>
     </React.Fragment>
   );
-}
-
-export default function (Component) {
-  return function(props){
-    const [open, setOpen] = React.useState(false);
-
-    React.useEffect(function(){
-      return function(){ toggleActivity(false); };
-    }, []);
-
-    function toggleActivity(e) { setOpen(e); };
-
-    return (
-      <React.Fragment>
-        <RenderDialog { ...{ open } } />
-        <Component { ...props } { ...{ toggleActivity, open } } />
-      </React.Fragment>
-    );
-  }
 }
