@@ -20,9 +20,9 @@ const ActivityDialog = ({activityDialogReducer}) => {
   return (
     <React.Fragment>
       <Dialog {...{open}}>
-        <DialogContent>
+        <DialogContent style={{display: "flex", alignItems: "center"}}>
           <CircularProgress />
-          <Typography>
+          <Typography style={{marginRight: "20px"}}>
             {message}
           </Typography>
         </DialogContent>

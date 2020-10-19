@@ -55,7 +55,16 @@ var ActivityDialog = function ActivityDialog(_ref) {
       message = activityDialogReducer.message;
   return _react["default"].createElement(_react["default"].Fragment, null, _react["default"].createElement(_core.Dialog, {
     open: open
-  }, _react["default"].createElement(_core.DialogContent, null, _react["default"].createElement(_core.CircularProgress, null), _react["default"].createElement(_core.Typography, null, message))));
+  }, _react["default"].createElement(_core.DialogContent, {
+    style: {
+      display: "flex",
+      alignItems: "center"
+    }
+  }, _react["default"].createElement(_core.CircularProgress, null), _react["default"].createElement(_core.Typography, {
+    style: {
+      marginRight: "20px"
+    }
+  }, message))));
 };
 
 var mapStateToProps = function mapStateToProps(_ref2) {
