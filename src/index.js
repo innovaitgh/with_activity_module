@@ -2,6 +2,8 @@ import React from "react";
 import {Dialog, DialogContent, CircularProgress, Typography} from "@material-ui/core";
 import ActivityDialogReducer from './reducer';
 import {eventHideActivityDialog,EVENT_HIDE_ACTIVITY_DIALOG, invokeShowActivityDialog, INVOKE_SHOW_ACTIVITY_DIALOG} from "./actions";
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
 
 export {
   ActivityDialogReducer,
@@ -11,7 +13,8 @@ export {
   INVOKE_SHOW_ACTIVITY_DIALOG
 }
 
-export default ({activityDialogReducer}) => {
+const ActivityDialog = ({activityDialogReducer}) => {
+
   const {open, message} = activityDialogReducer;
 
   return (
@@ -27,3 +30,7 @@ export default ({activityDialogReducer}) => {
     </React.Fragment>
   );
 }
+
+const mapStateToProps = ({ActivityDialogReducer}) => ({activityDialogReducer: ActivityDialogReducer});
+
+export default connect(mapStateToProps, {})(ActivityDialog);
