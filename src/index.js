@@ -38,9 +38,9 @@ export default (Component) => (props) => {
     message: ""
   });
 
-  const hideActivityDialogDispatch = () => setOpen({ ...activityDialogState, open: false });
+  const hideActivityDialogDispatch = () => setActivityDialogState({ ...activityDialogState, open: false });
 
-  const showActivityDialogDispatch = (message) => setOpen({ message, open: true });
+  const showActivityDialogDispatch = (message) => setActivityDialogState({ message, open: true });
 
   return (
     <ActivityDialogContext.Provider value={activityDialogState}>

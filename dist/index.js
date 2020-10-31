@@ -67,13 +67,13 @@ var _default = function _default(Component) {
         setActivityDialogState = _React$useState2[1];
 
     var hideActivityDialogDispatch = function hideActivityDialogDispatch() {
-      return setOpen(_objectSpread({}, activityDialogState, {
+      return setActivityDialogState(_objectSpread({}, activityDialogState, {
         open: false
       }));
     };
 
     var showActivityDialogDispatch = function showActivityDialogDispatch(message) {
-      return setOpen({
+      return setActivityDialogState({
         message: message,
         open: true
       });
