@@ -1,21 +1,20 @@
 import React from "react";
-import {Dialog, DialogContent, CircularProgress, Typography} from "@material-ui/core";
-import ActivityDialogReducer from './reducer';
-import {eventHideActivityDialog,EVENT_HIDE_ACTIVITY_DIALOG, invokeShowActivityDialog, INVOKE_SHOW_ACTIVITY_DIALOG} from "./actions";
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
+import {
+  Dialog,
+  DialogContent,
+  CircularProgress,
+  Typography
+} from "@material-ui/core";
 
-export {
-  ActivityDialogReducer,
-  eventHideActivityDialog,
-  EVENT_HIDE_ACTIVITY_DIALOG,
-  invokeShowActivityDialog,
-  INVOKE_SHOW_ACTIVITY_DIALOG
-}
+export const ActivityDialogContext = React.createContext();
+export const HideActivityDialogDispatch = React.createContext();
+export const ShowActivityDialogDispatch = React.createContext();
 
-const ActivityDialog = ({activityDialogReducer}) => {
+const ActivityDialog = () => {
 
-  const {open, message} = activityDialogReducer;
+  const activityDialogState = React.useContext(ActivityDialogContext);
+
+  const {open, message} = activityDialogState;
 
   return (
     <React.Fragment>
@@ -29,8 +28,29 @@ const ActivityDialog = ({activityDialogReducer}) => {
       </Dialog>
     </React.Fragment>
   );
-}
 
-const mapStateToProps = ({ActivityDialogReducer}) => ({activityDialogReducer: ActivityDialogReducer});
+};
 
-export default connect(mapStateToProps, {})(ActivityDialog);
+export default (Component) => (props) => {
+
+  const [activityDialogState, setActivityDialogState] = React.useState({
+    open: false,
+    message: ""
+  });
+
+  const hideActivityDialogDispatch = () => setOpen({ ...activityDialogState, open: false });
+
+  const showActivityDialogDispatch = (message) => setOpen({ message, open: true });
+
+  return (
+    <ActivityDialogContext.Provider value={activityDialogState}>
+      <HideActivityDialogDispatch.Provider value={hideActivityDialogDispatch}>
+        <ShowActivityDialogDispatch.Provider value={showActivityDialogDispatch}>
+          <Component {...props} />
+          <ActivityDialog />
+        </ShowActivityDialogDispatch.Provider>
+      </HideActivityDialogDispatch.Provider>
+    </ActivityDialogContext.Provider>
+  );
+
+};
