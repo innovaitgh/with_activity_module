@@ -7,14 +7,13 @@ import {
 } from "@material-ui/core";
 
 export const ActivityDialogContext = React.createContext();
-export const HideActivityDialogDispatch = React.createContext();
-export const ShowActivityDialogDispatch = React.createContext();
 
 const ActivityDialog = () => {
 
-  const activityDialogState = React.useContext(ActivityDialogContext);
-
-  const {open, message} = activityDialogState;
+  const {
+    open,
+    message
+  } = React.useContext(ActivityDialogContext);
 
   return (
     <React.Fragment>
@@ -31,26 +30,30 @@ const ActivityDialog = () => {
 
 };
 
-export default (Component) => (props) => {
+const withActivityDialog = (Component) => (props) => {
 
   const [activityDialogState, setActivityDialogState] = React.useState({
     open: false,
     message: ""
   });
 
-  const hideActivityDialogDispatch = () => setActivityDialogState({ ...activityDialogState, open: false });
+  const hideActivityDialog = () => setActivityDialogState({ open: false, message: "" });
 
-  const showActivityDialogDispatch = (message) => setActivityDialogState({ message, open: true });
+  const showActivityDialog = (message) => setActivityDialogState({ message, open: true });
+
+  const activityDialogContext = {
+    activityDialogState,
+    showActivityDialog,
+    hideActivityDialog
+  }
 
   return (
-    <ActivityDialogContext.Provider value={activityDialogState}>
-      <HideActivityDialogDispatch.Provider value={hideActivityDialogDispatch}>
-        <ShowActivityDialogDispatch.Provider value={showActivityDialogDispatch}>
-          <Component {...props} />
-          <ActivityDialog />
-        </ShowActivityDialogDispatch.Provider>
-      </HideActivityDialogDispatch.Provider>
+    <ActivityDialogContext.Provider value={activityDialogContext}>
+      <Component {...props} />
+      <ActivityDialog />
     </ActivityDialogContext.Provider>
   );
 
 };
+
+export default withActivityDialog;
