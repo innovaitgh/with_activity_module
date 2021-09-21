@@ -17,7 +17,7 @@ const ActivityDialog = ({activityDialogState}) => {
 
   return (
     <React.Fragment>
-      <Dialog {...{open}}>
+      <Dialog {...{open}} disableEnforceFocus>
         <DialogContent style={{display: "flex", alignItems: "center"}}>
           <CircularProgress />
           <Typography style={{marginLeft: "20px"}}>

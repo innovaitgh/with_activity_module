@@ -32,7 +32,8 @@ var ActivityDialog = function ActivityDialog(_ref) {
   var open = activityDialogState.open,
       message = activityDialogState.message;
   return /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement(_core.Dialog, {
-    open: open
+    open: open,
+    disableEnforceFocus: true
   }, /*#__PURE__*/_react["default"].createElement(_core.DialogContent, {
     style: {
       display: "flex",
