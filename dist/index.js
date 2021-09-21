@@ -27,11 +27,10 @@ var ActivityDialogContext = /*#__PURE__*/_react["default"].createContext();
 
 exports.ActivityDialogContext = ActivityDialogContext;
 
-var ActivityDialog = function ActivityDialog() {
-  var _React$useContext = _react["default"].useContext(ActivityDialogContext),
-      open = _React$useContext.open,
-      message = _React$useContext.message;
-
+var ActivityDialog = function ActivityDialog(_ref) {
+  var activityDialogState = _ref.activityDialogState;
+  var open = activityDialogState.open,
+      message = activityDialogState.message;
   return /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement(_core.Dialog, {
     open: open
   }, /*#__PURE__*/_react["default"].createElement(_core.DialogContent, {
@@ -71,13 +70,14 @@ var withActivityDialog = function withActivityDialog(Component) {
     };
 
     var activityDialogContext = {
-      activityDialogState: activityDialogState,
       showActivityDialog: showActivityDialog,
       hideActivityDialog: hideActivityDialog
     };
     return /*#__PURE__*/_react["default"].createElement(ActivityDialogContext.Provider, {
       value: activityDialogContext
-    }, /*#__PURE__*/_react["default"].createElement(Component, props), /*#__PURE__*/_react["default"].createElement(ActivityDialog, null));
+    }, /*#__PURE__*/_react["default"].createElement(Component, props), /*#__PURE__*/_react["default"].createElement(ActivityDialog, {
+      activityDialogState: activityDialogState
+    }));
   };
 };
 

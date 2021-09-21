@@ -8,12 +8,12 @@ import {
 
 export const ActivityDialogContext = React.createContext();
 
-const ActivityDialog = () => {
+const ActivityDialog = ({activityDialogState}) => {
 
   const {
     open,
     message
-  } = React.useContext(ActivityDialogContext);
+  } = activityDialogState;
 
   return (
     <React.Fragment>
@@ -42,7 +42,6 @@ const withActivityDialog = (Component) => (props) => {
   const showActivityDialog = (message) => setActivityDialogState({ message, open: true });
 
   const activityDialogContext = {
-    activityDialogState,
     showActivityDialog,
     hideActivityDialog
   }
@@ -50,10 +49,11 @@ const withActivityDialog = (Component) => (props) => {
   return (
     <ActivityDialogContext.Provider value={activityDialogContext}>
       <Component {...props} />
-      <ActivityDialog />
+      <ActivityDialog {...{activityDialogState}} />
     </ActivityDialogContext.Provider>
   );
 
 };
 
 export default withActivityDialog;
+
